@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+#include<graphics.h>
+using namespace std;
+void DrawCircle(int h,int k,int x,int y)
+{
+    putpixel(h+x,k+y,RED);
+    putpixel(h-x,k+y,RED);
+    putpixel(h+x,k-y,RED);
+    putpixel(h-x,k-y,RED);
+
+    putpixel(h+y,k+x,RED);
+    putpixel(h-y,k+x,RED);
+    putpixel(h+y,k-x,RED);
+    putpixel(h-y,k-x,RED);
+}
+
+void Bresenham(int h,int k,int r){
+   int x=0,y=r;
+   int d=3-2*r;
+   DrawCircle(h,k,x,y);
+   while(y>=x)
+   {
+       x++;
+       if(d>0){
+        y--;
+        d=d+4*(x-y)+10;
+       }
+       else
+           d=d+4*x+6;
+       DrawCircle(h,k,x,y);
+       delay(100);
+   }
+}
+int main()
+{
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+    cout<<"Enter point and radius :: ";
+    int x,y,r;cin>>x>>y>>r;
+    Bresenham(x,y,r);
+    getch();
+    closegraph();
+    return 0;
+}
